@@ -51,9 +51,23 @@ app.get('/empresa_produtos_limpeza/v1/categorias', async (req, res) =>{
     res.json(categorias)
 })
 
+app.post('empresa_produtos_limpeza/v1/categorias', async (req, res) =>{
+    let {id, nome} = req.body
+    const infos = [id, nome]
+    let result = await incluirCategorias(infos)
+    res.json(result)
+})
+
 app.get('/empresa_produtos_limpeza/v1/produtos', async (req, res) =>{
     let produtos = await buscarProdutos()
     res.json(produtos)
+})
+
+app.post('empresa_produtos_limpeza/v1/produtos', async (req, res) =>{
+    let {codigo, nome, id_categoria, preco} = req.body
+    const infos = [codigo, nome, id_categoria, preco]
+    let result = await incluirProdutos(infos)
+    res.json(result)
 })
 
 app.get('/empresa_produtos_limpeza/v1/itempedido', async (req, res) =>{
@@ -61,9 +75,23 @@ app.get('/empresa_produtos_limpeza/v1/itempedido', async (req, res) =>{
     res.json(itempedido)
 })
 
+app.post('empresa_produtos_limpeza/v1/itempedido', async (req, res) =>{
+    let {id, id_pedido, id_produto, qnt} = req.body
+    const infos = [id, id_pedido, id_produto, qnt]
+    let result = await incluirItemPedido(infos)
+    res.json(result)
+})
+
 app.get('/empresa_produtos_limpeza/v1/pedido', async (req, res) =>{
     let pedido = await buscarPedido()
     res.json(pedido)
+})
+
+app.post('empresa_produtos_limpeza/v1/pedido', async (req, res) =>{
+    let {numero, data_elaboracao, cliente_id} = req.body
+    const infos = [numero, data_elaboracao, cliente_id]
+    let result = await incluirPedido(infos)
+    res.json(result)
 })
 
 app.get('/empresa_produtos_limpeza/v1/endereco', async (req, res) =>{
@@ -71,11 +99,25 @@ app.get('/empresa_produtos_limpeza/v1/endereco', async (req, res) =>{
     res.json(endereco)
 })
 
+app.post('empresa_produtos_limpeza/v1/endereco', async (req, res) =>{
+    let {id, logradouro, cep, numero, bairro,  cidade} = req.body
+    const infos = [id, logradouro, cep, numero, bairro,  cidade]
+    let result = await incluirEndereco(infos)
+    res.json(result)
+})
+
 app.get('/empresa_produtos_limpeza/v1/status', async (req, res) =>{
     let status = await buscarStatus()
     res.json(status)
 })
 
+
+app.post('empresa_produtos_limpeza/v1/status', async (req, res) =>{
+    let {id, nome} = req.body
+    const infos = [id, nome]
+    let result = await incluirStatus(infos)
+    res.json(result)
+})
 
 const porta = 3000
 
